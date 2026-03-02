@@ -1,0 +1,111 @@
+{
+	"Name": "UAD Console Hotkeys",
+	"Version": "0.1.0.0",
+	"Author": "Cearka",
+	"Actions": [
+		{
+			"Name": "UA Mute",
+			"UUID": "com.cearka.uad-console-hotkeys.mute",
+			"Icon": "imgs/actions/counter/icon",
+			"Tooltip": "Toggle mute on a UA Console channel.",
+			"PropertyInspectorPath": "ui/mute.html",
+			"Controllers": ["Keypad"],
+			"States": [
+				{
+					"Image": "imgs/actions/counter/key",
+					"Title": "LIVE",
+					"TitleAlignment": "middle"
+				},
+				{
+					"Image": "imgs/actions/counter/key",
+					"Title": "MUTED",
+					"TitleAlignment": "middle"
+				}
+			]
+		},
+		{
+			"Name": "UA Plugins",
+			"UUID": "com.cearka.uad-console-hotkeys.plugins",
+			"Icon": "imgs/actions/counter/icon",
+			"Tooltip": "Toggle all plugin inserts on a UA Console channel.",
+			"PropertyInspectorPath": "ui/plugins.html",
+			"Controllers": ["Keypad"],
+			"States": [
+				{
+					"Image": "imgs/actions/counter/key",
+					"Title": "FX ON",
+					"TitleAlignment": "middle"
+				},
+				{
+					"Image": "imgs/actions/counter/key",
+					"Title": "BYPASSED",
+					"TitleAlignment": "middle"
+				}
+			]
+		},
+		{
+			"Name": "UA Unison",
+			"UUID": "com.cearka.uad-console-hotkeys.unison",
+			"Icon": "imgs/actions/counter/icon",
+			"Tooltip": "Toggle Unison slot on UA Console input 0 or 1.",
+			"PropertyInspectorPath": "ui/unison.html",
+			"Controllers": ["Keypad"],
+			"States": [
+				{
+					"Image": "imgs/actions/counter/key",
+					"Title": "UNISON ON",
+					"TitleAlignment": "middle"
+				},
+				{
+					"Image": "imgs/actions/counter/key",
+					"Title": "UNISON OFF",
+					"TitleAlignment": "middle"
+				}
+			]
+		},
+		{
+			"Name": "UA Master",
+			"UUID": "com.cearka.uad-console-hotkeys.master",
+			"Icon": "imgs/actions/counter/icon",
+			"Tooltip": "Toggle mute and all plugins on a UA Console channel.",
+			"PropertyInspectorPath": "ui/master.html",
+			"Controllers": ["Keypad"],
+			"States": [
+				{
+					"Image": "imgs/actions/counter/key",
+					"Title": "ON",
+					"TitleAlignment": "middle"
+				},
+				{
+					"Image": "imgs/actions/counter/key",
+					"Title": "OFF",
+					"TitleAlignment": "middle"
+				}
+			]
+		}
+	],
+	"Category": "UAD Console Hotkeys",
+	"CategoryIcon": "imgs/plugin/category-icon",
+	"CodePath": "bin/plugin.js",
+	"Description": "Allows the streamdeck to toggle mute/unmute on different channels, and toggle plugin power on different channels",
+	"Icon": "imgs/plugin/marketplace",
+	"SDKVersion": 3,
+	"Software": {
+		"MinimumVersion": "6.9"
+	},
+	"OS": [
+		{
+			"Platform": "mac",
+			"MinimumVersion": "12"
+		},
+		{
+			"Platform": "windows",
+			"MinimumVersion": "10"
+		}
+	],
+	"Nodejs": {
+		"Version": "20",
+		"Debug": "enabled"
+	},
+	"UUID": "com.cearka.uad-console-hotkeys"
+}

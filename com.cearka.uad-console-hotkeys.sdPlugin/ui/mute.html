@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>UA Mute Settings</title>
+	<link rel="stylesheet" href="https://cdn.elgato.com/streamdeck/1.5/sdpi.css" />
+</head>
+<body class="sdpi-wrapper">
+	<div class="sdpi-item">
+		<div class="sdpi-item-label">Input Index</div>
+		<input class="sdpi-item-value" type="number" id="inputIndex" min="0" max="9" value="0" />
+	</div>
+	<div class="sdpi-item" style="font-size:11px; color:#888; padding: 4px 8px;">
+		0=ANALOG1, 1=ANALOG2, 2=INST1, 3=INST2,<br>
+		4=ADAT3, 5=ADAT4, 6=LEAFAMP, 7=SM57,<br>
+		8=TRASHTALK, 9=WIRELESS
+	</div>
+
+	<script>
+		const inputEl = document.getElementById("inputIndex");
+
+		// Load saved settings
+		window.addEventListener("message", (event) => {
+			const json = event.data;
+			if (json.event === "sendToPropertyInspector") {
+				const settings = json.payload;
+				if (settings.inputIndex !== undefined) {
+					inputEl.value = settings.inputIndex;
+				}
+			}
+		});
+
+		// Save on change
+		inputEl.addEventListener("change", () => {
+			window.opener?.postMessage({
+				event: "sendToPlugin",
+				payload: { inputIndex: parseInt(inputEl.value) }
+			}, "*");
+		});
+
+		// Use Stream Deck PI SDK if available
+		const connectElgatoStreamDeckSocket = (port, uuid, event, info) => {
+			const ws = new WebSocket(`ws://127.0.0.1:${port}`);
+
+			ws.onopen = () => {
+				ws.send(JSON.stringify({ event, uuid }));
+				ws.send(JSON.stringify({ event: "getSettings", context: uuid }));
+			};
+
+			ws.onmessage = (msg) => {
+				const data = JSON.parse(msg.data);
+				if (data.event === "didReceiveSettings") {
+					const settings = data.payload.settings;
+					if (settings.inputIndex !== undefined) {
+						inputEl.value = settings.inputIndex;
+					}
+				}
+			};
+
+			inputEl.addEventListener("change", () => {
+				ws.send(JSON.stringify({
+					event: "setSettings",
+					context: uuid,
+					payload: { inputIndex: parseInt(inputEl.value) }
+				}));
+			});
+		};
+	</script>
+</body>
+</html>

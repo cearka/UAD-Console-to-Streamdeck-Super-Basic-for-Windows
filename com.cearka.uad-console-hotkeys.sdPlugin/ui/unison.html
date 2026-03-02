@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>UA Unison Settings</title>
+	<link rel="stylesheet" href="https://cdn.elgato.com/streamdeck/1.5/sdpi.css" />
+</head>
+<body class="sdpi-wrapper">
+	<div class="sdpi-item">
+		<div class="sdpi-item-label">Input Index</div>
+		<select class="sdpi-item-value" id="inputIndex">
+			<option value="0">0 — ANALOG 1</option>
+			<option value="1">1 — ANALOG 2</option>
+		</select>
+	</div>
+	<div class="sdpi-item" style="font-size:11px; color:#888; padding: 4px 8px;">
+		Unison slot only exists on inputs 0 and 1.
+	</div>
+
+	<script>
+		const inputEl = document.getElementById("inputIndex");
+
+		const connectElgatoStreamDeckSocket = (port, uuid, event, info) => {
+			const ws = new WebSocket(`ws://127.0.0.1:${port}`);
+
+			ws.onopen = () => {
+				ws.send(JSON.stringify({ event, uuid }));
+				ws.send(JSON.stringify({ event: "getSettings", context: uuid }));
+			};
+
+			ws.onmessage = (msg) => {
+				const data = JSON.parse(msg.data);
+				if (data.event === "didReceiveSettings") {
+					const settings = data.payload.settings;
+					if (settings.inputIndex !== undefined) {
+						inputEl.value = settings.inputIndex;
+					}
+				}
+			};
+
+			inputEl.addEventListener("change", () => {
+				ws.send(JSON.stringify({
+					event: "setSettings",
+					context: uuid,
+					payload: { inputIndex: parseInt(inputEl.value) }
+				}));
+			});
+		};
+	</script>
+</body>
+</html>
