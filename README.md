@@ -3,7 +3,7 @@
 plugin for controlling Universal Audio Apollo Console directly from elgato streamdeck. toggles channel mutes, bypass plugin inserts, toggles the unison slot (I seperated that out), and combine mute + bypass into a single master button.  
 in my setup, I got a preamp with 8 channels going to my apollot over adat, so I need to quick toggles to mute and unmute, but also to bypass plugins in order to manage that valuable D. S. P. (oh yeah!).
 
-you can also just use the python script with something like autohotkey or whatever if you don't have a stream deck.
+you can also just use the python script with something like autohotkey or whatever if you don't have a stream deck.  I wrote them for AHK first before converting it to a plugin.  (they're standalone, so editting theese are easier but they DO NOT effect the plugin for stream deck)
 
 if you want more features, just get wire shark, sniff port tcp port 4710, click some buttons in console, and you can figure out what the commands that need to be sent are.
 
