@@ -20,9 +20,7 @@ I've wrapped this up to the point that it does what I need to do, so I probably 
 | **UA Unison** | Toggle the Unison slot (inputs 0 and 1 only). States: `UNISON ON` / `UNISON OFF` |
 | **UA Master** | Toggle mute + all plugins together on a channel. States: `ON` / `OFF` |
 
-Each action has a configurable **Input Index** so you can drag multiple buttons onto your deck and assign them to different channels independently. Button state syncs automatically when Stream Deck launches.
-
-Button titles can be customized per-state in the Stream Deck UI without being overridden by the plugin.
+the buttons are pretty self explanatory.  if you wanna have a button that can do individual slots on the bypass, you'll have to update the code.  mine's an all or nothin'
 
 ---
 
